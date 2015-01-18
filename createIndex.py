@@ -1,17 +1,28 @@
 from whoosh.index import create_in
 from whoosh.qparser import QueryParser
 from whoosh.fields import *
+from whoosh.query import Term
+from whoosh.analysis import StandardAnalyzer
 import yaml
 import csv
 from bs4 import BeautifulSoup
 import urllib2,urllib
+import os
 
 def getPhoneDetails(user_query):
 	phones = {}
 	url  = "http://www.flipkart.com{0}"
 	hdr = {'User-Agent': 'Mozilla/5.0'}
 
-	schema = Schema(title=TEXT(stored=True), content=TEXT(stored=True))
+	# Set index, we index title and content as texts and tags as keywords.
+	# We store inside index only titles and ids.
+	analyzer =StandardAnalyzer(stoplist=None, minsize=1)
+	schema = Schema(title=TEXT(analyzer=analyzer, stored=True), content=STORED)
+	 
+	# Create index dir if it does not exists.
+	if not os.path.exists("indexNew"):
+	    os.mkdir("indexNew")
+
 	ix = create_in("indexNew", schema)
 	writer = ix.writer()
 

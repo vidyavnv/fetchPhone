@@ -18,6 +18,7 @@ Get details of the phones from Flipkart
 	This creates a csv file phonesFromSanpdeal.csv
 2. To get the links corresponding to the phones from Snapdeal from Flipkart, run:
 		$ python flipkartDetails.py
+	This creates a csv file IDsFromFlipkart.txt
 3. To search for a term, run:
 		$ python get_details.py
 	Open http://127.0.0.1:5000/ and enter the serach query
