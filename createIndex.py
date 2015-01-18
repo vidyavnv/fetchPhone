@@ -36,9 +36,9 @@ def getPhoneDetails(user_query):
 
 	with ix.searcher() as searcher:
 		query = QueryParser("title", ix.schema).parse(user_query)
-		results = searcher.search(query, limit=6)
+		results = searcher.search(query)
 		print results
-		for result in results:
+		for result in results[:6]:
 			print result['title']
 			url_page = url.format(result['content'])
 			print url_page
