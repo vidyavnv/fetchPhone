@@ -15,7 +15,6 @@ def my_form_post():
 
     text = request.form['text']
     details = getPhoneDetails(text)
-    # phones = json.dumps(details)
     return jsonify(**details)
 
 if __name__ == '__main__':

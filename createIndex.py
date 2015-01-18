@@ -15,7 +15,7 @@ def getPhoneDetails(user_query):
 	ix = create_in("indexNew", schema)
 	writer = ix.writer()
 
-	with open("dataFinalNew.txt",'rb') as phoneList:
+	with open("flipkartIDs.txt",'rb') as phoneList:
 		json_data = yaml.load(phoneList)
 
 	for links in json_data:
@@ -42,6 +42,5 @@ def getPhoneDetails(user_query):
 				price = "NA"
 			keyFeatures = soup.find('div',{'class':"productSpecs specSection"})
 			phoneDetails = keyFeatures.text
-			# print "".join(line.strip() for line in phoneDetails.split("\t"))
 			phones.update({result['title']:{'Price':price,'Specifications':"".join(line.strip() for line in phoneDetails.split("\t"))}})
 	return phones
